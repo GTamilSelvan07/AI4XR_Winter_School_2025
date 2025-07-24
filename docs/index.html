@@ -1,78 +1,641 @@
----
-layout: default
-title: AI4XR Winter School 2025
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI4XR Winter School 2025</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; line-height: 1.6; color: #333; }
-    header { position: relative; text-align: center; color: white; }
-    header img.cover { width: 100%; max-height: 400px; object-fit: cover; filter: brightness(50%); }
-    header h1 { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); margin: 0; font-size: 3rem; }
-    section { padding: 2rem; }
-    .gallery { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .gallery img { width: 200px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-    .btn { display: inline-block; background: #007acc; color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../images/arcive_cover.jpeg');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3) blur(2px);
+      z-index: -1;
+    }
+
+    .hero-content {
+      z-index: 1;
+      max-width: 800px;
+      padding: 2rem;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    .hero-subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      font-weight: 300;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      opacity: 0.8;
+      line-height: 1.8;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main content */
+    .main-content {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      margin: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    section {
+      padding: 4rem 3rem;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #2d3748;
+      font-weight: 700;
+      position: relative;
+      text-align: center;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+
+    /* Cards and content styling */
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .feature-card h3 {
+      color: #667eea;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .feature-card p {
+      color: #4a5568;
+      line-height: 1.6;
+    }
+
+    /* Speakers grid */
+    .speakers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .speaker-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .speaker-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .speaker-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .speaker-affiliation {
+      opacity: 0.9;
+      font-size: 0.9rem;
+    }
+
+    /* Topics styling */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .topic-item {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+      padding: 1.5rem;
+      border-radius: 15px;
+      color: #2d3748;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .topic-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    /* Resources styling */
+    .resources-list {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .resources-list li {
+      margin-bottom: 1rem;
+    }
+
+    .resources-list a {
+      display: block;
+      background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+      color: #2d3748;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .resources-list a:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+      margin: 0.5rem;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Location section */
+    .location-info {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      padding: 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .location-info h3 {
+      color: #2d3748;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .location-info p {
+      color: #4a5568;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    /* Repository structure */
+    .repo-structure {
+      background: #2d3748;
+      color: #e2e8f0;
+      padding: 2rem;
+      border-radius: 15px;
+      margin-top: 2rem;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+    }
+
+    .repo-structure pre {
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .main-content {
+        margin: 1rem;
+      }
+      
+      section {
+        padding: 2rem 1.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .hero-content {
+        padding: 1rem;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
-<header>
-  <img src="../images/arcive_cover.jpeg" alt="AI4XR Winter School" class="cover">
-  <h1>AI4XR Winter School 2025</h1>
-</header>
+  <div class="bg-animation"></div>
+  
+  <header>
+    <div class="hero-content">
+      <h1>AI4XR Winter School 2025</h1>
+      <p class="hero-subtitle">Where Artificial Intelligence Meets Extended Reality</p>
+      <p class="hero-description">
+        Experience the rapid convergence of AI and XR technologies. This intensive winter school provides researchers and practitioners with foundational knowledge to explore how these cutting-edge technologies can be seamlessly combined.
+      </p>
+      <a href="#about" class="btn">Explore the Program</a>
+      <a href="https://youtube.com/@convai" class="btn">Watch Talks</a>
+    </div>
+  </header>
 
-<section>
-  <h2>About the School</h2>
-  <ul>
-    <li><strong>Hands-on learning:</strong> Each day mixes short lectures with practical group work.</li>
-    <li><strong>No prerequisites:</strong> The sessions assume no background in AI, XR, or programming.</li>
-    <li><strong>Full-time schedule:</strong> Expect roughly 8 hours per day of immersive activities.</li>
-    <li><strong>Location:</strong> D Building Project Space, Mawson Lakes campus, University of South Australia in Adelaide.</li>
-  </ul>
-</section>
+  <div class="main-content">
+    <section id="about" class="fade-in">
+      <h2>About the Winter School</h2>
+      <div class="content-grid">
+        <div class="feature-card">
+          <h3>🎯 No Prerequisites</h3>
+          <p>The course assumes no background in AI, XR, or programming. Perfect for beginners and experts alike looking to explore new frontiers.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🔬 Hands-on Learning</h3>
+          <p>Each day mixes 2-3 hours of lectures with 4-6 hours of practical group work and project development.</p>
+        </div>
+        <div class="feature-card">
+          <h3>⏰ Intensive Schedule</h3>
+          <p>Full-time short course running for eight hours a day with immersive activities and collaborative learning.</p>
+        </div>
+        <div class="feature-card">
+          <h3>🏛️ Premium Location</h3>
+          <p>D Building Project Space at the prestigious Mawson Lakes campus, University of South Australia in Adelaide.</p>
+        </div>
+      </div>
+      
+      <div class="location-info">
+        <h3>📍 Location Details</h3>
+        <p><strong>D Building Project Space</strong><br>
+        Mawson Lakes Campus, University of South Australia<br>
+        Adelaide, South Australia</p>
+      </div>
+    </section>
 
-<section>
-  <h2>Topics Covered</h2>
-  <ul>
-    <li>XR fundamentals and tools</li>
-    <li>Foundations of AI and machine learning</li>
-    <li>AI-enhanced interaction and behavior recognition</li>
-    <li>AI-driven characters and collaboration</li>
-    <li>Large language models and computer vision</li>
-    <li>Ethics and future research directions</li>
-  </ul>
-</section>
+    <section class="fade-in">
+      <h2>Confirmed Speakers</h2>
+      <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: #4a5568;">
+        Learn from world-renowned researchers and practitioners from academia and industry
+      </p>
+      <div class="speakers-grid">
+        <div class="speaker-card">
+          <div class="speaker-name">Mark Billinghurst</div>
+          <div class="speaker-affiliation">University of South Australia</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Wolfgang Mayer</div>
+          <div class="speaker-affiliation">University of South Australia</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Lia Song</div>
+          <div class="speaker-affiliation">University of Adelaide</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Feras Dayoub</div>
+          <div class="speaker-affiliation">University of Adelaide</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Yun Suen Pai</div>
+          <div class="speaker-affiliation">University of Auckland</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Tamil Gunasekaran</div>
+          <div class="speaker-affiliation">University of Auckland</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Allison Jing</div>
+          <div class="speaker-affiliation">RMIT</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Suranga</div>
+          <div class="speaker-affiliation">NUS</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Mar</div>
+          <div class="speaker-affiliation">Google</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Liwei Chan</div>
+          <div class="speaker-affiliation">NYCU</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Mishra Sra</div>
+          <div class="speaker-affiliation">UCSB</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Shunichi Kasahara</div>
+          <div class="speaker-affiliation">Sony CSL</div>
+        </div>
+        <div class="speaker-card">
+          <div class="speaker-name">Tim Gentle</div>
+          <div class="speaker-affiliation">Industry Expert</div>
+        </div>
+      </div>
+    </section>
 
-<section>
-  <h2>Resources in This Repository</h2>
-  <ul>
-    <li><a href="../day-1/">Day&nbsp;1 – Introduction to XR and AI, plus tutorial resources</a></li>
-    <li><a href="../day-2/">Day&nbsp;2 – Machine learning essentials and AI-driven robotics</a></li>
-    <li><a href="../day-3/">Day&nbsp;3 – Knowledge representation for XR</a></li>
-    <li><a href="../day-4/">Day&nbsp;4 – AI wearables and winter school seminars</a></li>
-    <li><a href="../day-5/">Day&nbsp;5 – Assistive augmentation workshop</a></li>
-  </ul>
-  <p>Feel free to browse the folders above to access the PDFs, presentations, and example notebooks.</p>
-</section>
+    <section class="fade-in">
+      <h2>Topics Covered</h2>
+      <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: #4a5568;">
+        Comprehensive curriculum spanning the intersection of AI and XR
+      </p>
+      <div class="topics-grid">
+        <div class="topic-item">Fundamentals of XR</div>
+        <div class="topic-item">AI & Machine Learning Essentials</div>
+        <div class="topic-item">Integrating AI into AR/VR</div>
+        <div class="topic-item">AI for XR Prototyping</div>
+        <div class="topic-item">Emotion & Stress Recognition</div>
+        <div class="topic-item">AI-Enhanced User Input</div>
+        <div class="topic-item">Behavior Recognition Systems</div>
+        <div class="topic-item">AI-Driven Characters</div>
+        <div class="topic-item">AI-Enhanced Collaboration</div>
+        <div class="topic-item">Large Language Models (LLMs)</div>
+        <div class="topic-item">Computer Vision Applications</div>
+        <div class="topic-item">Ethics in AI</div>
+        <div class="topic-item">Future Research Directions</div>
+        <div class="topic-item">Advanced Study Tools</div>
+      </div>
+    </section>
 
-<section>
-  <h2>Gallery</h2>
-  <div class="gallery">
-    <img src="../images/1752664469975.jpeg" alt="Workshop photo 1">
-    <img src="../images/1752714460506.jpeg" alt="Workshop photo 2">
-    <img src="../images/1752714462896.jpeg" alt="Workshop photo 3">
-    <img src="../images/1753077818107.jpeg" alt="Workshop photo 4">
-    <img src="../images/1753077818284.jpeg" alt="Workshop photo 5">
-    <img src="../images/1753077818700.jpeg" alt="Workshop photo 6">
-    <img src="../images/1753077821832.jpeg" alt="Workshop photo 7">
+    <section class="fade-in">
+      <h2>Learning Resources</h2>
+      <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; color: #4a5568;">
+        Access comprehensive materials, presentations, and hands-on tutorials
+      </p>
+      <ul class="resources-list">
+        <li><a href="../day-1/">Day 1 – Introduction to XR and AI, plus tutorial resources</a></li>
+        <li><a href="../day-2/">Day 2 – Machine learning essentials and AI-driven robotics</a></li>
+        <li><a href="../day-3/">Day 3 – Knowledge representation for XR</a></li>
+        <li><a href="../day-4/">Day 4 – AI wearables and Inclusive Reality  seminars</a></li>
+        <li><a href="../day-5/">Day 5 – Assistive augmentation  and Human AI Integration </a></li>
+      </ul>
+      <p style="text-align: center; margin-top: 2rem; color: #4a5568;">
+        Browse the folders above to access PDFs, presentations, and example notebooks.
+      </p>
+      
+      <div class="repo-structure">
+        <h3 style="color: #81e6d9; margin-bottom: 1rem;">Repository Structure</h3>
+        <pre>
+.
+├── README.md          – overview and course information
+└── day-1/
+    ├── Presentation Slides/ – slides and example notebooks
+    └── Resources/           – guides and reference material
+        </pre>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <h2>Getting Started</h2>
+      <div class="content-grid">
+        <div class="feature-card">
+          <h3>1. Clone Repository</h3>
+          <p>Clone this repository to obtain all slides and comprehensive resources for the winter school.</p>
+        </div>
+        <div class="feature-card">
+          <h3>2. Navigate Materials</h3>
+          <p>Explore relevant folders (e.g., day-1/Presentation Slides or day-1/Resources) and open the documents.</p>
+        </div>
+        <div class="feature-card">
+          <h3>3. Follow Tutorials</h3>
+          <p>Use the step-by-step tutorials during the winter school or for independent self-study.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <h2>Gallery</h2>
+      <div class="gallery">
+        <img src="../images/1752664469975.jpeg" alt="Workshop participants engaged in hands-on learning">
+        <img src="../images/1752714460506.jpeg" alt="AI and XR demonstration session">
+        <img src="../images/1752714462896.jpeg" alt="Collaborative project work">
+        <img src="../images/1753077818107.jpeg" alt="Interactive technology showcase">
+        <img src="../images/1753077818284.jpeg" alt="Student presentations and discussions">
+        <img src="../images/1753077818700.jpeg" alt="Advanced XR equipment demonstration">
+        <img src="../images/1753077821832.jpeg" alt="Group learning and networking">
+      </div>
+    </section>
+
+    <section class="fade-in" style="text-align: center; border-bottom: none;">
+      <h2>Watch the Talks</h2>
+      <p style="margin-bottom: 2rem; font-size: 1.1rem; color: #4a5568;">
+        Catch recordings and related videos from our comprehensive lecture series
+      </p>
+      <a class="btn" href="https://www.youtube.com/playlist?list=PLeDO0aTeFXwKINxOQPw3Np0Jm9caWmJ7D">🎥 Visit Our YouTube Channel</a>
+      
+      <div style="margin-top: 3rem; padding: 2rem; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-radius: 15px;">
+        <h3 style="color: #2d3748; margin-bottom: 1rem;">Feedback & Contributions</h3>
+        <p style="color: #4a5568;">
+          Did you attend the school? Have additional materials or corrections? Feel free to open a pull request or issue. Contributions are welcome!
+        </p>
+      </div>
+    </section>
   </div>
-</section>
 
-<section>
-  <h2>Watch the Talks</h2>
-  <p>Catch recordings and related videos on our <a class="btn" href="https://youtube.com/@convai">YouTube channel</a>.</p>
-</section>
+  <script>
+    // Scroll animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Gallery image modal (simple version)
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', function() {
+        // Simple alert - could be enhanced with a proper modal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+          background: rgba(0,0,0,0.9); display: flex; align-items: center; 
+          justify-content: center; z-index: 1000; cursor: pointer;
+        `;
+        const modalImg = document.createElement('img');
+        modalImg.src = this.src;
+        modalImg.style.cssText = 'max-width: 90%; max-height: 90%; border-radius: 10px;';
+        modal.appendChild(modalImg);
+        document.body.appendChild(modal);
+        
+        modal.addEventListener('click', () => {
+          document.body.removeChild(modal);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
