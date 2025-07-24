@@ -20,12 +20,12 @@ Confirmed speakers include researchers and practitioners from academia and indus
 - Yun Suen Pai (University of Auckland)
 - Tamil Gunasekaran (University of Auckland)
 - Allison Jing (RMIT)
-- Ruofei Du (Hong Kong)
 - Suranga (NUS)
 - Mar (Google)
 - Liwei Chan (NYCU)
 - Mishra Sra (UCSB)
 - Shunichi Kasahara (Sony CSL)
+- Tim Gentle
 
 ## Topics Covered
 
@@ -56,24 +56,6 @@ The repository currently includes the materials for the first day of the school:
     ├── Presentation Slides/ – slides and example notebooks
     └── Resourses/           – guides and reference material
 ```
-
-### Presentation Slides
-
-The **day-1/Presentation Slides** directory contains PDF and PowerPoint slides from the invited speakers. Example files include:
-
-- `[Allison] XR+AI Winter School.pdf`
-- `[Tamil] Integrating AI for XR.pdf`
-- `[Lia_Jul25] ML+XR Winter School.pptx`
-- `[Lia_Jul25] Prac_Question.ipynb`
-
-### Resources
-
-Within **day-1/Resourses**, you will find additional tutorial documents to support the hands‑on sessions:
-
-- `Unity-AI_Guide.pdf`
-- `LMStudio-Guide.pdf`
-- `Meta_Quest_Passthrough-Guide.pdf`
-- `CONVAI_Guide.pdf`
 
 These guides provide step‑by‑step instructions for using various tools in conjunction with AI and XR systems.
 
