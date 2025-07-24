@@ -20,23 +20,22 @@ Welcome to the AI4XR Winter School repository! This page collects the slides and
 ## Topics Covered
 - XR fundamentals and tools
 - Foundations of AI and machine learning
-- AI-enhanced interaction and behavior recognition
+- AI-enhanced interaction and behaviour recognition
 - AI-driven characters and collaboration
 - Large language models and computer vision
 - Ethics and future research directions
 
 ## Resources in This Repository
-Slides and materials are organized by day:
+Slides and materials are organised by day:
 
 - [Day&nbsp;1](../day-1/) – Introduction to XR and AI, plus tutorial resources
 - [Day&nbsp;2](../day-2/) – Machine learning essentials and AI-driven robotics
 - [Day&nbsp;3](../day-3/) – Knowledge representation for XR
-- [Day&nbsp;4](../day-4/) – AI wearables and winter school seminars
-- [Day&nbsp;5](../day-5/) – Assistive augmentation workshop
-
+- [Day&nbsp;4](../day-4/) – AI wearables and Inclusive Reality
+- [Day&nbsp;5](../day-5/) – Assistive augmentation and Human AI Integration
 Feel free to browse the folders above to access the PDFs, presentations, and example notebooks.
 
 ## Watch the Talks
-Catch recordings and related videos on [YouTube](https://youtube.com/@convai).
+Catch recordings and related videos on [YouTube](https://youtube.com/playlist?list=PLeDO0aTeFXwKINxOQPw3Np0Jm9caWmJ7D&si=UHeaQNZKCSKYjUkU).
 
 We hope these resources help you dive deeper into the exciting world of AI and XR!
